@@ -1,5 +1,7 @@
 # Authorization to buff.163.com through Steam
 
+Steam account must be registered on the buff.163.com
+
 # Usage
 
 ```python
