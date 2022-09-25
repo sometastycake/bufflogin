@@ -85,9 +85,8 @@ class Buff:
         """
         if await self.is_authorized():
             return
-        await self._storage.clear(self._steam.login)
         await self._steam.login_to_steam()
-        await self._http.request(
+        await self._http.bytes(
             method='POST',
             url='https://steamcommunity.com/openid/login',
             data=await self.get_openid_params(),
