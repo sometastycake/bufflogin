@@ -4,7 +4,7 @@ from setuptools import setup
 
 requirements = [
     'lxml>=4.9.1',
-    'pysteamauth>=0.0.5',
+    'pysteamauth>=0.0.8',
     'cssselect>=1.1.0',
 ]
 

@@ -1,6 +1,6 @@
 # Authorization to buff.163.com through Steam
 
-[![pypi: package](https://img.shields.io/badge/pypi-0.0.2-blue)](https://pypi.org/project/bufflogin/)
+[![pypi: package](https://img.shields.io/badge/pypi-0.0.3-blue)](https://pypi.org/project/bufflogin/)
 [![Imports: isort](https://img.shields.io/badge/imports-isort-success)](https://pycqa.github.io/isort/)
 [![Linter: flake8](https://img.shields.io/badge/linter-flake8-success)](https://github.com/PyCQA/flake8)
 [![Mypy: checked](https://img.shields.io/badge/mypy-checked-success)](https://github.com/python/mypy)
@@ -28,7 +28,7 @@ async def main():
     steam = Steam(
         login='login',
         password='password',
-        steamid=123456789,
+        steamid=76561111111111111,
     )
     buff = Buff(steam)
     await buff.login_to_buff()
