@@ -1,7 +1,7 @@
 from typing import (
     Any,
     Dict,
-    Type,
+    Optional,
 )
 
 import lxml.html as html
@@ -23,15 +23,15 @@ class Buff:
     def __init__(
         self,
         steam: Steam,
-        cookie_storage: Type[CookieStorageAbstract] = BaseCookieStorage,
-        request_strategy: Type[RequestStrategyAbstract] = BaseRequestStrategy,
+        cookie_storage: Optional[CookieStorageAbstract] = None,
+        request_strategy: Optional[RequestStrategyAbstract] = None,
     ):
         self._steam = steam
-        self._http = request_strategy()
-        self._storage = cookie_storage()
+        self._requests = request_strategy if request_strategy is not None else BaseRequestStrategy()
+        self._storage = cookie_storage if cookie_storage is not None else BaseCookieStorage()
 
     async def request(self, url: str, method: str = 'GET', **kwargs: Any) -> str:
-        return await self._http.text(
+        return await self._requests.text(
             url=url,
             method=method,
             cookies=await self._storage.get(self._steam.login, domain='buff.163.com'),
@@ -57,7 +57,7 @@ class Buff:
         return params
 
     async def get_openid_params(self) -> Dict[str, str]:
-        response = await self._http.text(
+        response = await self._requests.text(
             method='GET',
             url='https://buff.163.com/account/login/steam?back_url=/',
             cookies=await self._steam.cookies(),
@@ -68,7 +68,7 @@ class Buff:
         if await self.is_authorized():
             return
         await self._steam.login_to_steam()
-        await self._http.bytes(
+        await self._requests.bytes(
             method='POST',
             url='https://steamcommunity.com/openid/login',
             data=await self.get_openid_params(),
@@ -77,7 +77,7 @@ class Buff:
         await self._storage.set(
             login=self._steam.login,
             cookies={
-                'buff.163.com': self._http.cookies('buff.163.com'),
+                'buff.163.com': self._requests.cookies('buff.163.com'),
             },
         )
         if not await self.is_authorized():
