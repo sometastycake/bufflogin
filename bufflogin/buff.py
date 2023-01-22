@@ -20,9 +20,6 @@ from .schemas import BuffAuthorizationStatus
 
 
 class Buff:
-    """
-    Authorization to buff.163.com through Steam.
-    """
     def __init__(
         self,
         steam: Steam,
@@ -34,9 +31,6 @@ class Buff:
         self._storage = cookie_storage()
 
     async def request(self, url: str, method: str = 'GET', **kwargs: Any) -> str:
-        """
-        Request with Buff session.
-        """
         return await self._http.text(
             url=url,
             method=method,
@@ -45,18 +39,12 @@ class Buff:
         )
 
     async def is_authorized(self) -> bool:
-        """
-        Is alive authorization.
-        """
         response: str = await self.request(
             url='https://buff.163.com/api/market/goods/bill_order',
         )
         return BuffAuthorizationStatus.parse_raw(response).is_authorized()
 
     def parse_openid_params(self, response: str) -> Dict[str, str]:
-        """
-        Parse openid parameters.
-        """
         page = html.document_fromstring(response)
         params = {
             'action': '',
@@ -69,9 +57,6 @@ class Buff:
         return params
 
     async def get_openid_params(self) -> Dict[str, str]:
-        """
-        Get openid parameters for authorization.
-        """
         response = await self._http.text(
             method='GET',
             url='https://buff.163.com/account/login/steam?back_url=/',
@@ -80,9 +65,6 @@ class Buff:
         return self.parse_openid_params(response)
 
     async def login_to_buff(self) -> None:
-        """
-        Login to buff.163.com.
-        """
         if await self.is_authorized():
             return
         await self._steam.login_to_steam()
