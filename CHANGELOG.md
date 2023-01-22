@@ -1,4 +1,4 @@
-# Bufflogin changelog
+# Changelog
 
 ## [v0.0.4 (2023-01-22)](https://github.com/sometastycake/bufflogin/releases/tag/v0.0.4)
 
@@ -16,4 +16,4 @@
 
 ## [v0.0.1 (2022-09-15)](https://github.com/sometastycake/bufflogin/releases/tag/v0.0.1)
 
-- Authorization to buff.163.com through Steam
+- Authorization to `buff.163.com` through Steam
