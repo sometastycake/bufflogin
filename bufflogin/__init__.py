@@ -6,4 +6,4 @@ __all__ = [
 ]
 
 __author__ = 'Mike M'
-__version__ = '0.0.3'
+__version__ = '0.0.4'
