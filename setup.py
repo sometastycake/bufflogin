@@ -4,14 +4,14 @@ from setuptools import setup
 
 requirements = [
     'lxml>=4.9.1',
-    'pysteamauth>=0.0.8',
+    'pysteamauth>=1.0.0',
     'cssselect>=1.1.0',
 ]
 
 
 setup(
     name='bufflogin',
-    version='0.0.3',
+    version='0.0.4',
     url='https://github.com/sometastycake/bufflogin',
     license='MIT',
     author='Mike M',
