@@ -29,11 +29,20 @@ class Buff:
         self._requests = request_strategy if request_strategy is not None else BaseRequestStrategy()
         self._storage = cookie_storage if cookie_storage is not None else BaseCookieStorage()
 
+    @property
+    def steam(self) -> Steam:
+        return self._steam
+
     async def request(self, url: str, method: str = 'GET', **kwargs: Any) -> str:
+        custom_cookies = kwargs.pop('cookies', {})
+        storage_cookies = await self._storage.get(
+            login=self._steam.login,
+            domain='buff.163.com',
+        )
         return await self._requests.text(
             url=url,
             method=method,
-            cookies=await self._storage.get(self._steam.login, domain='buff.163.com'),
+            cookies={**storage_cookies, **custom_cookies},
             **kwargs,
         )
 
