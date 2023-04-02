@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.0.5 (2023-04-02)](https://github.com/sometastycake/bufflogin/releases/tag/v0.0.4)
+
+- Updated `is_authorized` method
+
 ## [v0.0.4 (2023-01-22)](https://github.com/sometastycake/bufflogin/releases/tag/v0.0.4)
 
 - Removed docstrings

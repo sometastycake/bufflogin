@@ -16,7 +16,6 @@ from pysteamauth.base import (
 )
 
 from .exceptions import BuffLoginError
-from .schemas import BuffAuthorizationStatus
 
 
 class Buff:
@@ -38,11 +37,11 @@ class Buff:
             **kwargs,
         )
 
-    async def is_authorized(self) -> bool:
+    async def is_alive_session(self) -> bool:
         response: str = await self.request(
-            url='https://buff.163.com/api/market/goods/bill_order',
+            url='https://buff.163.com/news/',
         )
-        return BuffAuthorizationStatus.parse_raw(response).is_authorized()
+        return '"user": {"' in response and '"nickname": "' in response
 
     def parse_openid_params(self, response: str) -> Dict[str, str]:
         page = html.document_fromstring(response)
@@ -65,7 +64,7 @@ class Buff:
         return self.parse_openid_params(response)
 
     async def login_to_buff(self) -> None:
-        if await self.is_authorized():
+        if await self.is_alive_session():
             return
         await self._steam.login_to_steam()
         await self._requests.bytes(
@@ -80,5 +79,5 @@ class Buff:
                 'buff.163.com': self._requests.cookies('buff.163.com'),
             },
         )
-        if not await self.is_authorized():
+        if not await self.is_alive_session():
             raise BuffLoginError(self._steam.login)
