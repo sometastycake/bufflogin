@@ -11,7 +11,7 @@ requirements = [
 
 setup(
     name='bufflogin',
-    version='0.0.4',
+    version='0.0.5',
     url='https://github.com/sometastycake/bufflogin',
     license='MIT',
     author='Mike M',
