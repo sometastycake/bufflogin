@@ -1,6 +1,10 @@
 # Changelog
 
-## [v0.0.5 (2023-04-02)](https://github.com/sometastycake/bufflogin/releases/tag/v0.0.4)
+## [v0.0.6 (2023-04-02)](https://github.com/sometastycake/bufflogin/releases/tag/v0.0.6)
+
+- Added ability to define custom cookies in requests to Buff
+
+## [v0.0.5 (2023-04-02)](https://github.com/sometastycake/bufflogin/releases/tag/v0.0.5)
 
 - Updated `is_authorized` method
 

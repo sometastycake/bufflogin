@@ -1,6 +1,6 @@
 # Authorization to buff.163.com through Steam
 
-[![pypi: package](https://img.shields.io/badge/pypi-0.0.5-blue)](https://pypi.org/project/bufflogin/)
+[![pypi: package](https://img.shields.io/badge/pypi-0.0.6-blue)](https://pypi.org/project/bufflogin/)
 [![Python: versions](
 https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10-blue)]()
 
@@ -26,7 +26,7 @@ async def main():
     )
     buff = Buff(steam)
     await buff.login_to_buff()
-    await buff.request('https://buff.163.com/api/market/goods/bill_order?game=csgo&goods_id=200')
+    response: str = await buff.request('https://buff.163.com/')
 ```
 
 ## License
